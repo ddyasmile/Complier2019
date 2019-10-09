@@ -26,7 +26,7 @@ class Scanner : public ScannerBase {
   void preCode();
   void postCode(PostEnum__ type);
   void adjust();
-  void adjustStr();
+  void adjustStr(char flag);
 
   int commentLevel_;
   std::string stringBuf_;
@@ -56,7 +56,48 @@ inline void Scanner::adjust() {
   charPos_ += length();
 }
 
-inline void Scanner::adjustStr() { charPos_ += length(); }
+inline void Scanner::adjustStr(char flag) { 
+  charPos_ += length();
+  std::string tmp = matched();
+  std::string str = "";
+  switch (flag)
+  {
+  case 0:
+    setMatched(stringBuf_);
+    stringBuf_ = "";
+    break;
+  case 1:
+    stringBuf_.append("\n");
+    break;
+  case 2:
+    stringBuf_.append("\t");
+    break;
+  case 3:
+    stringBuf_.append("\"");
+    break;
+  case 4:
+    stringBuf_.append("\\");
+    break;
+  case 5:
+    str += atoi(tmp.c_str()+1);
+    stringBuf_.append(str);
+    break;
+  case 6:
+    break;
+  case 7:
+    stringBuf_.append("\0");
+    break;
+  case 8:
+    str += tmp[2]-'A'+1;
+    stringBuf_.append(str);
+    break;
+  case 9:
+    stringBuf_.append(matched());
+    break;
+  default:
+    break;
+  }
+}
 
 #endif  // TIGER_LEX_SCANNER_H_
 
