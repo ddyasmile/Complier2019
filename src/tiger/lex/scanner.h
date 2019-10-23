@@ -91,7 +91,7 @@ inline void Scanner::adjustStr(char flag) {
     str += tmp[2]-'A'+1;
     stringBuf_.append(str);
     break;
-  case 9:
+  case 9: 
     stringBuf_.append(matched());
     break;
   default:
