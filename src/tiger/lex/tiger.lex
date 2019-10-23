@@ -123,7 +123,7 @@
 <STR>"\\\\"                          {adjustStr(4);}
 <STR>\\[0-9][0-9][0-9]               {adjustStr(5);}
 <STR>\\[ \n\t\f]+\\                  {adjustStr(6);}
-<STR>\\\^@	                     {adjustStr(7);}
+<STR>\\\^@	                         {adjustStr(7);}
 <STR>\\\^[A-Z]                       {adjustStr(8);}
 <STR>.                               {adjustStr(9);}
 
