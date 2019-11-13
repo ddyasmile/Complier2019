@@ -23,15 +23,17 @@ VoidTy VoidTy::voidty_;
 Ty *Ty::ActualTy() {
   Ty *ty = this;
   while (ty->kind == TY::Ty::NAME) {
-    ty = static_cast<TY::NameTy *>(ty)->ty;
+    Ty *ty_ty = static_cast<TY::NameTy *>(ty)->ty;
     if (this == ty) return nullptr;
   }
   return ty;
 }
 
 bool Ty::IsSameType(Ty *expected) {
+  //fprintf(stderr, "compare\n");
   Ty *a = this->ActualTy();
   Ty *b = expected->ActualTy();
+  //fprintf(stderr, "a b %d %d %d\n", a->kind, b->kind, a == b);
 
   if ((a->kind == RECORD && b->kind == NIL) ||
       (a->kind == NIL && b->kind == RECORD)) {
