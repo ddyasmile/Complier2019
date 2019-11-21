@@ -23,7 +23,7 @@ VoidTy VoidTy::voidty_;
 Ty *Ty::ActualTy() {
   Ty *ty = this;
   while (ty->kind == TY::Ty::NAME) {
-    Ty *ty_ty = static_cast<TY::NameTy *>(ty)->ty;
+    ty = static_cast<TY::NameTy *>(ty)->ty;
     if (this == ty) return nullptr;
   }
   return ty;
